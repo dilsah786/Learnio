@@ -1,33 +1,26 @@
 const express = require("express");
-const cors = require("cors");
-const { connection } = require("./db");
-require("dotenv").config()
+const { connection } = require("./database");
+
+require("dotenv").config();
 
 const app = express();
 
-app.use(cors())
-app.use(express.json());
 
 
 
-
-const PORT = process.env.PORT 
-
-
-console.log(PORT);
-
-app.get("/",(req,res)=>{
-   res.json({success:true}) 
+app.get("/",async(req,res)=>{
+    res.json({sucess:trusted,message:"I am api for Learnio"})
 })
+ 
+const port = process.env.PORT 
 
-
-app.listen(PORT,async()=>{
-    try{
-      await connection;
-    }catch(err){
-        console.log("Error while connecting to Database" + err); 
+app.listen(port,async()=>{
+    try {
+        
+        await connection;
+        console.log("Connected to mongoDB Successfully");
+    } catch (error) {
+        console.log("Error occured while connectiong to Database", error);
     }
-
-    console.log(`App is listening on ${PORT}`);
-
+    console.log("App is listening on port 6000");
 })
